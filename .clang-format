@@ -1,0 +1,19 @@
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 100
+SortIncludes: true
+IncludeBlocks: Regroup
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+SpacesBeforeTrailingComments: 2
+FixNamespaceComments: true
+AlignTrailingComments: true
+MaxEmptyLinesToKeep: 1
+AlignEscapedNewlines: Left
+CompactNamespaces: false
+BinPackParameters: false
+BinPackArguments: false
+ReflowComments: true
+AllowShortFunctionsOnASingleLine: Empty
+CommentPragmas: '\{\{[[:space:]]*[A-Z0-9_]+(BLOCK|SLOT)_(BEGIN|END)'
