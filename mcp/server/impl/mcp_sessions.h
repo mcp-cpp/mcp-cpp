@@ -19,7 +19,7 @@ class McpSessions final : public Sessions<SessionId, Session> {
   McpSessions& operator=(const McpSessions&) = delete;
 
   // 默认构造函数
-  McpSessions() = default;
+  explicit McpSessions(const int max_capacity) : max_capacity_(max_capacity) {};
 
   bool Contains(const SessionId& id) const override {
     std::lock_guard<std::mutex> lock(mutex_);
@@ -36,9 +36,13 @@ class McpSessions final : public Sessions<SessionId, Session> {
     return default_empty_instance;
   }
 
-  void Emplace(const SessionId& id, const Session& session) override {
+  bool Emplace(const SessionId& id, const Session& session) override {
     std::lock_guard<std::mutex> lock(mutex_);
-    auto result = map_.emplace(id, session);
+    if (map_.size() >= max_capacity_) {
+      return false;
+    }
+    map_.emplace(id, session);
+    return true;
   }
 
   bool Erase(const SessionId& id) override {
@@ -51,9 +55,14 @@ class McpSessions final : public Sessions<SessionId, Session> {
     return false;
   }
 
+  [[nodiscard]] size_t MaxCapacity() const override {
+    return max_capacity_;
+  }
+
  private:
   std::map<SessionId, Session> map_{};
   mutable std::mutex mutex_;
+  size_t max_capacity_{0};
 };
 
 }  // namespace mcp

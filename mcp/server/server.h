@@ -44,8 +44,8 @@ class Server {
   // add filters soon
 
   // register session
-  virtual void RegisterSession(const std::string& id, const Session& session) = 0;
-  virtual void UnregisterSession(const std::string& id) = 0;
+  virtual bool RegisterSession(const std::string& id, const Session& session) = 0;
+  virtual bool UnregisterSession(const std::string& id) = 0;
 
   // start service
   virtual bool Serve() = 0;

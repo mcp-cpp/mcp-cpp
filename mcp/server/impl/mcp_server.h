@@ -44,9 +44,9 @@ class McpServer : public Server {
 
   Response HandleMessage(ServerContextPtr context) const override;
 
-  void RegisterSession(const std::string& id, const Session& session) override;
+  bool RegisterSession(const std::string& id, const Session& session) override;
 
-  void UnregisterSession(const std::string& id) override;
+  bool UnregisterSession(const std::string& id) override;
 
   bool Serve() override;
 

@@ -75,12 +75,16 @@ Response McpServer::HandleMessage(ServerContextPtr context) const {
   return method(context, request);
 }
 
-void McpServer::RegisterSession(const std::string& id, const Session& session) {
-  sessions_.Emplace(id, session);
+bool McpServer::RegisterSession(const std::string& id, const Session& session) {
+  // if exist or sessions are fulled return false
+  if (sessions_.Contains(id)) {
+    return false;
+  }
+  return sessions_.Emplace(id, session);
 }
 
-void McpServer::UnregisterSession(const std::string& id) {
-  sessions_.Erase(id);
+bool McpServer::UnregisterSession(const std::string& id) {
+  return sessions_.Erase(id);
 }
 
 bool McpServer::Serve() {
