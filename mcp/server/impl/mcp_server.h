@@ -18,7 +18,7 @@ class McpServer : public Server {
             std::string version,
             std::string instructions,
             TransportType io_type,
-            size_t max_capacity);
+            size_t max_capacity = 10000);
 
   using Handler = std::function<Response(ServerContextPtr ctx, const Request& request)>;
 
