@@ -6,6 +6,7 @@
 #include <functional>
 #include <string>
 
+#include "mcp/io/request.h"
 #include "mcp/server/server.h"
 
 namespace mcp {
@@ -13,6 +14,8 @@ namespace mcp {
 class McpServer : public Server {
  public:
   McpServer(std::string name, std::string version, std::string instructions);
+
+  using Handler = std::function<Response(ServerContextPtr ctx, const Request& request)>;
 
   std::string Name() const override {
     return name_;
@@ -42,7 +45,7 @@ class McpServer : public Server {
   std::string instructions_;
   std::unordered_map<std::string, std::unique_ptr<Tool>> tools_;
 
-  std::unordered_map<std::string, std::function<Response(ServerContextPtr)>> methods_handlers_;
+  std::unordered_map<std::string, Handler> methods_handlers_;
 };
 
 }  // namespace mcp
