@@ -6,6 +6,8 @@
 #include <utility>
 
 #include "mcp/common/mcp_method.h"
+#include "mcp/io/impl/sse_io_handler.h"
+#include "mcp/io/impl/std_io_handler.h"
 #include "mcp/io/json_rpc.h"
 #include "mcp/io/request.h"
 #include "mcp/io/response.h"
@@ -71,7 +73,11 @@ Response McpServer::HandleMessage(ServerContextPtr context) const {
 
 bool McpServer::Serve() {
   if (IoType() == TransportType::kStdIo) {
+    auto handler = std::make_unique<StdIoHandler>();
+    handler->Handle(this);
   } else if (IoType() == TransportType::kSse) {
+    auto handler = std::make_unique<SseIoHandler>();
+    handler->Handle(this);
   } else {
     return false;
   }
