@@ -54,8 +54,8 @@ McpServer::McpServer(std::string name,
 
 Response McpServer::HandleMessage(ServerContextPtr context) const {
   // parse message
-  Request request;
-  if (!request.Parse(context->request_message_)) {
+  Request request(context->request_message_);
+  if (!request.Parse()) {
     return {"", ErrorCode::kParseError, "Failed to parse request message"};
   }
   // Check for valid JSONRPC version
