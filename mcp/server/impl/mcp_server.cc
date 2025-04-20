@@ -48,11 +48,13 @@ void McpServer::AddRequestHandlers() {
 McpServer::McpServer(std::string name,
                      std::string version,
                      std::string instructions,
-                     TransportType io_type)
+                     TransportType io_type,
+                     size_t max_capacity)
     : name_(std::move(name)),
       version_(std::move(version)),
       instructions_(std::move(instructions)),
-      io_type_(io_type) {
+      io_type_(io_type),
+      sessions_(max_capacity) {
   AddRequestHandlers();
 }
 
