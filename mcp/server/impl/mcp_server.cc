@@ -47,7 +47,7 @@ McpServer::McpServer(std::string name, std::string version, std::string instruct
   };
 }
 
-Response McpServer::HandleMessage(ServerContextPtr context) const override {
+Response McpServer::HandleMessage(ServerContextPtr context) const {
   // parse message
   Request request;
   if (!request.Parse(context->request_message_)) {
