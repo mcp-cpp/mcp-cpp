@@ -7,6 +7,7 @@ namespace mcp {
 
 // Standard JSON-RPC error codes
 enum class ErrorCode : int {
+  kSuccess = 0,
   kParseError = -32700,
   kInvalidRequest = -32600,
   kMethodNotFound = -32601,
