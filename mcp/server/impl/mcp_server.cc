@@ -21,32 +21,32 @@ McpServer::McpServer(std::string name,
       instructions_(std::move(instructions)),
       io_type_(io_type) {
   methods_handlers_[kMethodInitialize] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "initialize success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "initialize success");
   };
   methods_handlers_[kMethodPing] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "ping success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "ping success");
   };
   methods_handlers_[kMethodResourcesList] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "resources list success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "resources list success");
   };
   methods_handlers_[kMethodResourcesTemplatesList] = [](ServerContextPtr ctx,
                                                         const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "resources templates list success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "resources templates list success");
   };
   methods_handlers_[kMethodResourcesRead] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "resource read success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "resource read success");
   };
   methods_handlers_[kMethodPromptsList] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "prompts list success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "prompts list success");
   };
   methods_handlers_[kMethodPromptsGet] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "prompts get success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "prompts get success");
   };
   methods_handlers_[kMethodToolsList] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "tools list success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "tools list success");
   };
   methods_handlers_[kMethodToolsCall] = [](ServerContextPtr ctx, const Request& request) {
-    return {request.ID(), ErrorCode::kSuccess, "tools call success"};
+    return Response(request.ID(), ErrorCode::kSuccess, "tools call success");
   };
 }
 
