@@ -1,7 +1,6 @@
 //
 //
 
-
 #pragma once
 
 #include <string>
@@ -12,11 +11,12 @@
 namespace mcp {
 
 class Tool {
-  public:
+ public:
   virtual ~Tool() = default;
-   [[nodiscard]] virtual std::string Name() const = 0;
 
-  virtual void Handle(ServerContextPtr context, CallToolRequest) const = 0;
+  [[nodiscard]] virtual std::string Name() const = 0;
+
+  virtual void Handle(const ServerContextPtr& context, const CallToolRequest&) const = 0;
 };
 
-} // mcp
+}  // namespace mcp

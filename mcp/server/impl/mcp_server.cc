@@ -12,8 +12,8 @@
 
 namespace mcp {
 
-McpServer::McpServer(std::string name, std::string version, std::string instructions)
-    : name_(std::move(name)), version_(std::move(version)), instructions_(std::move(instructions)) {
+McpServer::McpServer(std::string name, std::string version, std::string instructions, Type io_type)
+    : name_(std::move(name)), version_(std::move(version)), instructions_(std::move(instructions)), io_type_(io_type) {
   methods_handlers_[kMethodInitialize] = [](ServerContextPtr ctx, const Request& request) {
     return {request.ID(), 0, "initialize success"};
   };
@@ -62,5 +62,10 @@ Response McpServer::HandleMessage(ServerContextPtr context) const override {
   const auto& method = method_iter->second;
   return method(context, request);
 }
+
+bool McpServer::Serve() {
+  return true;
+}
+
 
 }  // namespace mcp

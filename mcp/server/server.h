@@ -30,7 +30,9 @@ class Server {
 
   [[nodiscard]] virtual Type IoType() const = 0;
 
-  virtual Response HandleMessage(ServerContextPtr context) const = 0;
+  [[nodiscard]] virtual Response HandleMessage(ServerContextPtr context) const = 0;
+
+  virtual bool Serve() = 0;
 };
 
 }  // namespace mcp
