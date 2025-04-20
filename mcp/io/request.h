@@ -19,6 +19,10 @@ class Request {
     return false;
   }
 
+  [[nodiscard]] const std::string& ID() const {
+    return id_;
+  }
+
   // Method name
   [[nodiscard]] const std::string& Method() const {
     return method_;
