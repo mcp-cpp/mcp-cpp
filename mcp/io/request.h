@@ -10,6 +10,7 @@ namespace mcp {
 
 class Request {
  public:
+  Request() = default;
   ~Request() = default;
 
   explicit Request(std::string json_str) : json_string_(std::move(json_str)) {}
