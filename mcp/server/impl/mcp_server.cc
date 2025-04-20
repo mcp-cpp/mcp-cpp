@@ -14,14 +14,7 @@
 
 namespace mcp {
 
-McpServer::McpServer(std::string name,
-                     std::string version,
-                     std::string instructions,
-                     TransportType io_type)
-    : name_(std::move(name)),
-      version_(std::move(version)),
-      instructions_(std::move(instructions)),
-      io_type_(io_type) {
+void McpServer::AddRequestHandlers() {
   methods_handlers_[kMethodInitialize] = [](ServerContextPtr ctx, const Request& request) {
     return Response(request.ID(), ErrorCode::kSuccess, "initialize success");
   };
@@ -52,6 +45,17 @@ McpServer::McpServer(std::string name,
   };
 }
 
+McpServer::McpServer(std::string name,
+                     std::string version,
+                     std::string instructions,
+                     TransportType io_type)
+    : name_(std::move(name)),
+      version_(std::move(version)),
+      instructions_(std::move(instructions)),
+      io_type_(io_type) {
+  AddRequestHandlers();
+}
+
 Response McpServer::HandleMessage(ServerContextPtr context) const {
   // parse message
   Request request(context->request_message_);
@@ -69,6 +73,14 @@ Response McpServer::HandleMessage(ServerContextPtr context) const {
   }
   const auto& method = method_iter->second;
   return method(context, request);
+}
+
+void McpServer::RegisterSession(const std::string& id, const Session& session) {
+  sessions_.Emplace(id, session);
+}
+
+void McpServer::UnregisterSession(const std::string& id) {
+  sessions_.Erase(id);
 }
 
 bool McpServer::Serve() {

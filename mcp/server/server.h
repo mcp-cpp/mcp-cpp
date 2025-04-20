@@ -7,6 +7,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "mcp/common/session.h"
 #include "mcp/io/response.h"
 #include "mcp/io/transport_type.h"
 #include "tool.h"
@@ -41,6 +42,10 @@ class Server {
   [[nodiscard]] virtual Response HandleMessage(ServerContextPtr context) const = 0;
 
   // add filters soon
+
+  // register session
+  virtual void RegisterSession(const std::string& id, const Session& session) = 0;
+  virtual void UnregisterSession(const std::string& id) = 0;
 
   // start service
   virtual bool Serve() = 0;

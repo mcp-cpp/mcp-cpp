@@ -8,6 +8,7 @@
 
 #include "mcp/io/request.h"
 #include "mcp/server/server.h"
+#include "mcp_sessions.h"
 
 namespace mcp {
 
@@ -43,9 +44,15 @@ class McpServer : public Server {
 
   Response HandleMessage(ServerContextPtr context) const override;
 
+  void RegisterSession(const std::string& id, const Session& session) override;
+
+  void UnregisterSession(const std::string& id) override;
+
   bool Serve() override;
 
  private:
+  void AddRequestHandlers();
+
   std::string name_;
   std::string version_;
   std::string instructions_;
@@ -53,6 +60,8 @@ class McpServer : public Server {
   std::unordered_map<std::string, std::unique_ptr<Tool>> tools_;
 
   std::unordered_map<std::string, Handler> methods_handlers_;
+
+  McpSessions<std::string, Session> sessions_;
 };
 
 }  // namespace mcp
