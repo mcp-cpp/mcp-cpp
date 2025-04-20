@@ -14,7 +14,11 @@ namespace mcp {
 
 class McpServer : public Server {
  public:
-  McpServer(std::string name, std::string version, std::string instructions, TransportType io_type);
+  McpServer(std::string name,
+            std::string version,
+            std::string instructions,
+            TransportType io_type,
+            size_t max_capacity);
 
   using Handler = std::function<Response(ServerContextPtr ctx, const Request& request)>;
 
