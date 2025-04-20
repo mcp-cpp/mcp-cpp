@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 #include "mcp/io/response.h"
-#include "mcp/io/io_type.h"
+#include "mcp/io/transport_type.h"
 #include "tool.h"
 
 namespace mcp {
@@ -35,10 +35,12 @@ class Server {
   virtual void AddTool(std::unique_ptr<Tool> tool) = 0;
 
   // io type, choose stdio or http SSE
-  [[nodiscard]] virtual Type IoType() const = 0;
+  [[nodiscard]] virtual TransportType IoType() const = 0;
 
   // handle message
   [[nodiscard]] virtual Response HandleMessage(ServerContextPtr context) const = 0;
+
+  // add filters
 
   // start service
   virtual bool Serve() = 0;

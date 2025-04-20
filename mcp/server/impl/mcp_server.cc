@@ -6,13 +6,13 @@
 #include <utility>
 
 #include "mcp/common/mcp_method.h"
-#include "mcp/io/Response.h"
+#include "mcp/io/response.h"
 #include "mcp/io/json_rpc.h"
 #include "mcp/io/request.h"
 
 namespace mcp {
 
-McpServer::McpServer(std::string name, std::string version, std::string instructions, Type io_type)
+McpServer::McpServer(std::string name, std::string version, std::string instructions, TransportType io_type)
     : name_(std::move(name)),
       version_(std::move(version)),
       instructions_(std::move(instructions)),
@@ -67,8 +67,8 @@ Response McpServer::HandleMessage(ServerContextPtr context) const override {
 }
 
 bool McpServer::Serve() {
-  if (IoType() == Type::kStdIo) {
-  } else if (IoType() == Type::kSse) {
+  if (IoType() == TransportType::kStdIo) {
+  } else if (IoType() == TransportType::kSse) {
   } else {
     return false;
   }

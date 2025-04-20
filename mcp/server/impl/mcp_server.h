@@ -13,7 +13,7 @@ namespace mcp {
 
 class McpServer : public Server {
  public:
-  McpServer(std::string name, std::string version, std::string instructions, Type io_type);
+  McpServer(std::string name, std::string version, std::string instructions, TransportType io_type);
 
   using Handler = std::function<Response(ServerContextPtr ctx, const Request& request)>;
 
@@ -37,7 +37,7 @@ class McpServer : public Server {
     tools_.emplace(tool->Name(), std::move(tool));
   }
 
-  [[nodiscard]] Type IoType() const override {
+  [[nodiscard]] TransportType IoType() const override {
     return io_type_;
   }
 
@@ -49,7 +49,7 @@ class McpServer : public Server {
   std::string name_;
   std::string version_;
   std::string instructions_;
-  Type io_type_;
+  TransportType io_type_;
   std::unordered_map<std::string, std::unique_ptr<Tool>> tools_;
 
   std::unordered_map<std::string, Handler> methods_handlers_;

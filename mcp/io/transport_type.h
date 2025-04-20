@@ -5,7 +5,7 @@
 
 namespace mcp {
 
-enum class Type : int {
+enum class TransportType : int {
   kStdIo = 1,
   kSse = 2,
 };
