@@ -7,6 +7,7 @@
 #include <string>
 
 #include "mcp/common/call_tool_request.h"
+#include "mcp/server/server_context.h"
 
 namespace mcp {
 
@@ -15,7 +16,7 @@ class Tool {
   virtual ~Tool() = default;
    [[nodiscard]] virtual std::string Name() const = 0;
 
-  virtual void Handle(CallToolRequest) const = 0;
+  virtual void Handle(ServerContextPtr context, CallToolRequest) const = 0;
 };
 
 } // mcp

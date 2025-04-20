@@ -5,11 +5,11 @@
 
 #include <string>
 
-#include "server/server.h"
+#include "mcp/server/server.h"
 
 namespace mcp {
 
-class McpServer final : public Server {
+class McpServer : public Server {
  public:
   McpServer(std::string name, std::string version, std::string instructions);
 
@@ -29,7 +29,7 @@ class McpServer final : public Server {
     return tools_;
   }
 
-  void AddTool(std::unique_ptr<Tool> tool) {
+  void AddTool(std::unique_ptr<Tool> tool) override {
     tools_.emplace(tool->Name(), std::move(tool));
   }
 
