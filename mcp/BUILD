@@ -16,4 +16,5 @@ cc_library(
     ]),
     deps = [
     ],
+    alwayslink = True,
 )
