@@ -23,9 +23,10 @@ void to_json(Json& j, const Request& req) {
 
 // from_json()
 void from_json(const Json& j, Request& req) {
+  // at maybe throw exception
   const auto jsonrpc_version_ = j.at(kJsonRpcVersionName).get<std::string>();
   const auto method = j.at(kMethodName).get<std::string>();
-  const auto params = j.at(kParamsName);
+  const auto& params = j.at(kParamsName);
 
   Identifier id;
   if (j.contains(kIdName)) {

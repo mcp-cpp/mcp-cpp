@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "identifier.h"
-#include "nlohmann/json.hpp"
+#include "third_party/nlohmann/json.hpp"
 
 namespace jsonrpc {
 
@@ -70,5 +70,19 @@ void to_json(Json& j, const Request& req);
 
 // from_json() request convert from json
 void from_json(const Json& j, Request& req);
+
+bool Parse(const std::string& json_str) {
+  try {
+    auto j = Json::parse(json_str);
+    auto request = j.get<Request>();
+  } catch (const nlohmann::json::parse_error& e) {
+    return false;
+  } catch (const std::exception& e) {
+    return false;
+  } catch (...) {
+    return false;
+  }
+  return true;
+}
 
 }  // namespace jsonrpc
