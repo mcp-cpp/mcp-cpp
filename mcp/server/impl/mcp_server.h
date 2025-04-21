@@ -6,7 +6,7 @@
 #include <functional>
 #include <string>
 
-#include "mcp/io/request.h"
+#include "mcp/jsonrpc/request.h"
 #include "mcp/server/server.h"
 #include "mcp_sessions.h"
 

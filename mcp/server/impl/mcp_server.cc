@@ -9,7 +9,6 @@
 #include "mcp/common/mcp_method.h"
 #include "mcp/io/impl/sse_io_handler.h"
 #include "mcp/io/impl/std_io_handler.h"
-#include "mcp/io/request.h"
 #include "mcp/io/response.h"
 #include "mcp/jsonrpc/request.h"
 
