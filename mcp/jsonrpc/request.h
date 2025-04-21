@@ -40,7 +40,12 @@ auto kIdName = "id";
 // exactly as binary fractions.
 class Request {
  public:
+  Request() = default;
+
   Request(std::string jsonrpc_version, std::string method, Json params, Identifier id);
+
+  // if failed returns false
+  bool Parse(const std::string& json_str);
 
   [[nodiscard]] const Identifier& Id() const {
     return id_;
@@ -70,19 +75,5 @@ void to_json(Json& j, const Request& req);
 
 // from_json() request convert from json
 void from_json(const Json& j, Request& req);
-
-bool Parse(const std::string& json_str) {
-  try {
-    auto j = Json::parse(json_str);
-    auto request = j.get<Request>();
-  } catch (const nlohmann::json::parse_error& e) {
-    return false;
-  } catch (const std::exception& e) {
-    return false;
-  } catch (...) {
-    return false;
-  }
-  return true;
-}
 
 }  // namespace jsonrpc

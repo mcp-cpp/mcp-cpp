@@ -5,12 +5,13 @@
 
 #include <utility>
 
+#include "../../jsonrpc/json_rpc.h"
 #include "mcp/common/mcp_method.h"
 #include "mcp/io/impl/sse_io_handler.h"
 #include "mcp/io/impl/std_io_handler.h"
-#include "mcp/io/json_rpc.h"
 #include "mcp/io/request.h"
 #include "mcp/io/response.h"
+#include "mcp/jsonrpc/request.h"
 
 namespace mcp {
 
@@ -60,12 +61,12 @@ McpServer::McpServer(std::string name,
 
 Response McpServer::HandleMessage(ServerContextPtr context) const {
   // parse message
-  Request request(context->request_message_);
-  if (!request.Parse()) {
+  jsonrpc::Request request;
+  if (!request.Parse(context->request_message_)) {
     return {"", ErrorCode::kParseError, "Failed to parse request message"};
   }
   // Check for valid JSONRPC version
-  if (request.JsonRpcVersion() != kJsonRpcVersion) {
+  if (request.JsonrpcVersion() != kJsonRpcVersion) {
     return {"", ErrorCode::kInvalidRequest, "Invalid JSON-RPC version"};
   }
   // find method

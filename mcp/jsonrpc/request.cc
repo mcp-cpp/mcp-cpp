@@ -10,6 +10,20 @@ Request::Request(std::string jsonrpc_version, std::string method, Json params, I
       params_(std::move(params)),
       id_(std::move(id)) {}
 
+bool Request::Parse(const std::string& json_str) {
+  try {
+    auto j = Json::parse(json_str);
+    from_json(j, *this);
+  } catch (const nlohmann::json::parse_error& e) {
+    return false;
+  } catch (const std::exception& e) {
+    return false;
+  } catch (...) {
+    return false;
+  }
+  return true;
+}
+
 // to_json()
 void to_json(Json& j, const Request& req) {
   j = Json{{kJsonRpcVersionName, req.JsonrpcVersion()},
