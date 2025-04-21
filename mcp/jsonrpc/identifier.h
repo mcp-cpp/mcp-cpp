@@ -7,7 +7,7 @@
 
 #include "third_party/nlohmann/json.hpp"
 
-namespace jsonrpc {
+namespace mcp {
 
 using Json = nlohmann::json;
 

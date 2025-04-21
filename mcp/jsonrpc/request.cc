@@ -2,7 +2,7 @@
 
 #include "request.h"
 
-namespace jsonrpc {
+namespace mcp {
 
 Request::Request(std::string jsonrpc_version, std::string method, Json params, Identifier id)
     : jsonrpc_version_(std::move(jsonrpc_version)),

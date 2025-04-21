@@ -4,7 +4,7 @@
 
 #include <utility>
 
-namespace jsonrpc {
+namespace mcp {
 
 Identifier::Identifier(int64_t id) : type_(IdType::kNumber), int_id_(id) {}
 Identifier::Identifier(const char* id) : type_(IdType::kString), string_id_(id) {}

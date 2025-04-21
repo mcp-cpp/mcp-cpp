@@ -9,7 +9,7 @@
 #include "identifier.h"
 #include "third_party/nlohmann/json.hpp"
 
-namespace jsonrpc {
+namespace mcp {
 
 auto kJsonRpcVersionName = "jsonrpc";
 auto kMethodName = "method";

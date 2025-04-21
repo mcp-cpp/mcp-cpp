@@ -60,7 +60,7 @@ McpServer::McpServer(std::string name,
 
 Response McpServer::HandleMessage(ServerContextPtr context) const {
   // parse message
-  jsonrpc::Request request;
+  mcp::Request request;
   if (!request.Parse(context->request_message_)) {
     return {"", ErrorCode::kParseError, "Failed to parse request message"};
   }
